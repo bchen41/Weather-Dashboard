@@ -13,31 +13,35 @@
 </head>
 
 <body class="flex-column min-100-vh">
-    <header class="jumbotron jumbotron-fluid">
+    <header class="jumbotron jumbotron-fluid d-flex justify-content-around align-items-baseline">
         <h1 class="weather-dashboard">Weather Dashboard</h1>
-        <h6 class="weather-dashboard-desc">Presenting to YOU with 5-Day Forecast</h6>
+        <h6 class="weather-dashboard-desc">Presenting You With 5-Day Forecast</h6>
     </header>
 
     <main class="container-fluid">
+
         <div class="row">
+
             <div class="col-3">
                 <section class="card">
-                    <h2 class="card-header">Search for a City:</h2>
-                    <form id="search-form" class="card-body">
-                        <label class="form-label" for="city-search">City Name</label>
+                    <h3 class="card-header">Search for a City:</h3>
+                    <form id="search-form" class="card-body ">
                         <input type="text" name="cityname" id="cityname">
                         <button type="submit" class="btn">Search</button>
                     </form>
                 </section>
             </div>
+            <br>
             <div class="col-9">
                 <h2 class="present-forecast"> <span id="city-search-term">Atlanta</span>
                     <div id="city-container"></div>
                 </h2>
             </div>
+
         </div>
 
-        <div class="row">
+        <div class="row mt-4">
+
             <div class="col-3">
                 <section class="card">
                     <h3 class="card-header">Search History:</h3>
@@ -61,7 +65,9 @@
             <div class="col">
                 <h5 id="data-dates">date</h5>
             </div>
+
         </div>
+
     </main>
     <script src="./assets/script.js"></script>
 </body>
