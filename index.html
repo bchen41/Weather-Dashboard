@@ -12,59 +12,75 @@
     <title>Weather Dashboard</title>
 </head>
 
-<body class="flex-column min-100-vh">
+<body class="d-flex flex-column flex-wrap min-100-vh">
     <header class="jumbotron jumbotron-fluid d-flex justify-content-around align-items-baseline">
         <h1 class="weather-dashboard">Weather Dashboard</h1>
-        <h6 class="weather-dashboard-desc">Presenting You With 5-Day Forecast</h6>
     </header>
 
     <main class="container-fluid">
 
-        <div class="row">
+        <div class="d-flex flex-wrap justify-space-between">
 
-            <div class="col-3">
-                <section class="card">
+            <div class="col-12 col-md-4">
+                <section class="search-card">
                     <h3 class="card-header">Search for a City:</h3>
-                    <form id="search-form" class="card-body ">
-                        <input type="text" name="cityname" id="cityname">
+                    <form id="weather-form" class="card-body ">
+                        <input type="text" name="cityname" id="cityname" class="form-input">
                         <button type="submit" class="btn">Search</button>
                     </form>
                 </section>
-            </div>
-            <br>
-            <div class="col-9">
-                <h2 class="present-forecast"> <span id="city-search-term">Atlanta</span>
-                    <div id="city-container"></div>
-                </h2>
-            </div>
 
-        </div>
 
-        <div class="row mt-4">
-
-            <div class="col-3">
-                <section class="card">
+                <section class="history-card">
                     <h3 class="card-header">Search History:</h3>
                     <div class="history-btn-container card-body"></div>
                     <!-- create element buttons with search history data and append to div -->
                 </section>
             </div>
 
-            <div class="col">
-                <h5 id="data-dates">date</h5>
+
+            <div class="col-12 col-md-8">
+                <h2 class="present-forecast"> <span id="city-search-term">Atlanta</span></h2>
+                <div id="city-container"></div>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. In ratione unde beatae corporis
+                    consequatur! Illum quo soluta quis hic, quidem molestiae blanditiis amet omnis? Sed cupiditate
+                    distinctio facilis architecto cumque.</p>
+
+
+                <div class="row">
+                    <div class="col">
+                        <h4>5-Day Forecast:</h4>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-md-4 col-lg">
+                        <h5 id="data-dates">date</h5>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae incidunt minus
+                            blanditiis obcaecati facere illum. Doloremque quia rerum alias ducimus? Aut ab ratione
+                            quaerat veritatis soluta natus dignissimos facere quis?</p>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg">
+                        <h5 id="data-dates">date</h5>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg">
+                        <h5 id="data-dates">date</h5>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg">
+                        <h5 id="data-dates">date</h5>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg">
+                        <h5 id="data-dates">date</h5>
+                    </div>
+                </div>
+
             </div>
-            <div class="col">
-                <h5 id="data-dates">date</h5>
-            </div>
-            <div class="col">
-                <h5 id="data-dates">date</h5>
-            </div>
-            <div class="col">
-                <h5 id="data-dates">date</h5>
-            </div>
-            <div class="col">
-                <h5 id="data-dates">date</h5>
-            </div>
+
+
+
+
+
+
 
         </div>
 
