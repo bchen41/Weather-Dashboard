@@ -1,0 +1,38 @@
+* {
+  box-sizing: border-box;
+}
+
+main {
+  margin: 20px auto;
+  width: 95%;
+}
+
+.search-card {
+  margin: 0 0 20px 0;
+  border: 2px solid var(--dark);
+  border-radius: var(--border-radius);
+}
+
+.history-card {
+  margin: 0 0 20px 0;
+}
+
+.btn {
+  color: var(--primary);
+  border: none;
+
+  /* background-color: var(--light-dark); */
+  box-shadow: 3px 3px var(--dark);
+  transform: translate(-1px, -1px);
+}
+
+.btn:hover {
+  color: var(--primary);
+  /* background-color: var(--tertiary); */
+  transform: translate(0, 0);
+  box-shadow: 2px 2px var(--dark);
+}
+
+.form-input {
+  width: 80%;
+}
