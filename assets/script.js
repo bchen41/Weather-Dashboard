@@ -1,7 +1,7 @@
 var weatherFormEl = document.querySelector("#weather-form");
 var cityInputEl = document.querySelector("#cityname");
 var cityContainerEl = document.querySelector("#city-container");
-var citySearchTerm = document.querySelector("#city-search-term");
+var citySearchTerm = document.querySelector(".city-search-term");
 var historyEl = document.querySelector(".history-card");
 var searchHistory = [];
 
@@ -78,13 +78,8 @@ var displayWeatherForecast = function (forecasts, searchTerm) {
     return;
   }
 
-  var weatherIcon = forecasts.current.weather[0].icon;
-  var imgSrc = "http://openweathermap.org/img/w/" + weatherIcon + ".png";
-
-  console.log(imgSrc);
   var currentDate = moment.unix(forecasts.current.dt).format("l");
-  var weatherIconImg = document.createElement("img");
-  weatherIconImg.setAttribute("src", imgSrc);
+  var currentWeatherIcon = forecasts.current.weather[0].icon;
 
   citySearchTerm.innerHTML =
     searchTerm.charAt(0).toUpperCase() +
@@ -92,6 +87,10 @@ var displayWeatherForecast = function (forecasts, searchTerm) {
     " (" +
     currentDate +
     ")";
+
+  var weatherIconImgEl = document.createElement("img");
+  var imgSrc = "http://openweathermap.org/img/w/" + currentWeatherIcon + ".png";
+  weatherIconImgEl.setAttribute("src", imgSrc);
 
   var currentTempEl = document.createElement("p");
   var currentWindEl = document.createElement("p");
@@ -109,8 +108,6 @@ var displayWeatherForecast = function (forecasts, searchTerm) {
   currentUVI.textContent = "UV Index: ";
   currentUVINum.textContent = forecasts.current.uvi;
 
-  console.log("forecasts", forecasts);
-
   if (currentUVINum.textContent <= 5) {
     currentUVINum.className = "uv-index-low";
   } else if (currentUVINum.textContent >= 6 || currentUVINum.textContent <= 7) {
@@ -121,7 +118,7 @@ var displayWeatherForecast = function (forecasts, searchTerm) {
 
   currentUVI.appendChild(currentUVINum);
   cityContainerEl.append(
-    weatherIconImg,
+    weatherIconImgEl,
     currentTempEl,
     currentWindEl,
     currentHumidity,
@@ -135,22 +132,33 @@ var displayFutureForecasts = function (forecasts, searchTerm, iterations) {
   }
 
   for (var i = 1; i <= iterations; i++) {
-    var futureDates = moment.unix(forecasts.daily[i].dt).format("l");
-
+    var futureDatesText = moment.unix(forecasts.daily[i].dt).format("l");
     var futureDatesEl = document.createElement("h5");
-    futureDatesEl.textContent = futureDates;
+    futureDatesEl.textContent = futureDatesText;
 
     var futureTempEl = document.createElement("p");
     var futureWindEl = document.createElement("p");
-    var futureHumidity = document.createElement("p");
+    var futureHumidityEl = document.createElement("p");
 
-    var futureDayEl = document.getElementById(i.toString());
-    removeAllChildNodes(futureDayEl);
-    futureDayEl.append(futureDatesEl);
+    futureTempEl.textContent = "Temp: " + forecasts.daily[i].temp.day + "\xB0F";
+    futureWindEl.textContent = "Wind: " + forecasts.daily[i].wind_speed + "MPH";
+    futureHumidityEl.textContent =
+      "Humidity: " + forecasts.daily[i].humidity + " %";
 
-    //removeAllChildNodes(futureTempEl);
-    //removeAllChildNodes(futureHomidity);
-    console.log(futureDates);
+    var futureDaysEl = document.getElementById(i.toString());
+
+    removeAllChildNodes(futureDaysEl);
+    removeAllChildNodes(futureTempEl);
+    removeAllChildNodes(futureWindEl);
+    removeAllChildNodes(futureHumidityEl);
+    futureDaysEl.append(
+      futureDatesEl,
+      futureTempEl,
+      futureWindEl,
+      futureHumidityEl
+    );
+
+    console.log(forecasts.daily[i]);
     // console.log(forecasts.daily[i].temp.day);
   }
 };
