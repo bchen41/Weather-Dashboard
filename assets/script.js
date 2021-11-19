@@ -12,8 +12,6 @@ var formSubmitHandler = function (event) {
 
   if (cityName) {
     getWeatherForecast(cityName);
-
-    cityContainerEl.textContent = "";
     cityInputEl.value = "";
   } else {
     alert("Please enter a city name");
@@ -51,14 +49,14 @@ var getWeatherForecast = function (city) {
       "&lon=" +
       lon +
       "&exclude=minutely,hourly&units=imperial&appid=05aaec66fd7cc6f94d62dd575b7836a9";
-    fetch(apiURL)
+    return fetch(apiURL)
       .then(function (response) {
         if (response.ok) {
           console.log(response);
           response.json().then(function (data) {
             console.log(data);
             displayWeatherForecast(data, city);
-            displayFutureForecasts(data, city);
+            displayFutureForecasts(data);
             appendToHistory(city);
             displayInHistory();
           });
@@ -115,7 +113,7 @@ var displayWeatherForecast = function (forecasts, searchTerm) {
   } else {
     currentUVINum.className = "uv-index-severe";
   }
-
+  removeAllChildNodes(cityContainerEl);
   currentUVI.appendChild(currentUVINum);
   cityContainerEl.append(
     weatherIconImgEl,
@@ -126,15 +124,18 @@ var displayWeatherForecast = function (forecasts, searchTerm) {
   );
 };
 
-var displayFutureForecasts = function (forecasts, searchTerm, iterations) {
-  if (!iterations) {
-    iterations = 5;
-  }
-
+var displayFutureForecasts = function (forecasts) {
+  const iterations = 5;
   for (var i = 1; i <= iterations; i++) {
     var futureDatesText = moment.unix(forecasts.daily[i].dt).format("l");
     var futureDatesEl = document.createElement("h5");
     futureDatesEl.textContent = futureDatesText;
+
+    var futureWeatherIcon = forecasts.daily[i].weather[0].icon;
+    var futureWeatherIconImgEl = document.createElement("img");
+    var imgSrc =
+      "http://openweathermap.org/img/w/" + futureWeatherIcon + ".png";
+    futureWeatherIconImgEl.setAttribute("src", imgSrc);
 
     var futureTempEl = document.createElement("p");
     var futureWindEl = document.createElement("p");
@@ -148,28 +149,23 @@ var displayFutureForecasts = function (forecasts, searchTerm, iterations) {
     var futureDaysEl = document.getElementById(i.toString());
 
     removeAllChildNodes(futureDaysEl);
-    removeAllChildNodes(futureTempEl);
-    removeAllChildNodes(futureWindEl);
-    removeAllChildNodes(futureHumidityEl);
+    futureDaysEl.style.border = "solid 1px";
+    futureDaysEl.style.padding = "5px";
+    futureDaysEl.style.backgroundColor = "gray";
+
     futureDaysEl.append(
       futureDatesEl,
+      futureWeatherIconImgEl,
       futureTempEl,
       futureWindEl,
       futureHumidityEl
     );
-
-    console.log(forecasts.daily[i]);
-    // console.log(forecasts.daily[i].temp.day);
   }
 };
 
 function removeAllChildNodes(parent) {
-  // delete any existing children
-  if (parent.hasChildNodes()) {
-    var children = parent.childNodes;
-    for (var j = 0; j < children.length; j++) {
-      parent.removeChild(children[j]);
-    }
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
   }
 }
 
@@ -186,9 +182,36 @@ function displayInHistory() {
   for (var i = searchHistory.length - 1; i >= 0; i--) {
     var btn = document.createElement("button");
     btn.setAttribute("type", "button");
+    btn.setAttribute("class", "historyBtn");
     btn.textContent = searchHistory[i];
+    btn.addEventListener("click", displayHistoryData);
     historyEl.append(btn);
   }
 }
 
+function displayHistoryData(event) {
+  var searchHistoryButton = event.target;
+  var historicalSearch = searchHistoryButton.textContent;
+  getWeatherForecast(historicalSearch);
+}
+
+function init() {
+  var storedCities = localStorage.getItem("cities");
+  var storedCitiesArr = JSON.parse(storedCities);
+  var historyEl = document.querySelector(".history-card");
+
+  for (var i = 0; i < storedCitiesArr.length; i++) {
+    var btn = document.createElement("button");
+    btn.setAttribute("type", "button");
+    btn.setAttribute("class", "historyBtn");
+    btn.textContent = storedCitiesArr[i];
+    console.log(btn.textContent);
+
+    historyEl.append(btn);
+    btn.addEventListener("click", displayHistoryData);
+  }
+}
+
 weatherFormEl.addEventListener("submit", formSubmitHandler);
+
+init();
