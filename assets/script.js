@@ -20,7 +20,7 @@ var formSubmitHandler = function (event) {
 
 var getLatAndLon = function (city) {
   var geoAPI =
-    "http://api.openweathermap.org/geo/1.0/direct?q=" +
+    "https://api.openweathermap.org/geo/1.0/direct?q=" +
     city +
     "&appid=05aaec66fd7cc6f94d62dd575b7836a9";
 
