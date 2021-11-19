@@ -20,15 +20,12 @@ main {
 .btn {
   color: var(--primary);
   border: none;
-
-  /* background-color: var(--light-dark); */
   box-shadow: 3px 3px var(--dark);
   transform: translate(-1px, -1px);
 }
 
 .btn:hover {
   color: var(--primary);
-  /* background-color: var(--tertiary); */
   transform: translate(0, 0);
   box-shadow: 2px 2px var(--dark);
 }
@@ -59,4 +56,14 @@ main {
   background-color: red;
   border-radius: 10px;
   padding: 0 15px;
+}
+
+.historyBtn {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.current-weather-container {
+  border-style: solid;
 }
