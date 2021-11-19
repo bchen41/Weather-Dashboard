@@ -3,7 +3,7 @@ var cityInputEl = document.querySelector("#cityname");
 var cityContainerEl = document.querySelector("#city-container");
 var citySearchTerm = document.querySelector(".city-search-term");
 var historyEl = document.querySelector(".history-card");
-var searchHistory = [];
+var searchHistory = JSON.parse(localStorage.getItem("cities")) || [];
 
 var formSubmitHandler = function (event) {
   event.preventDefault();
@@ -75,19 +75,21 @@ var displayWeatherForecast = function (forecasts, searchTerm) {
     cityContainerEl.textContent = "No forecasts found.";
     return;
   }
-
   var currentDate = moment.unix(forecasts.current.dt).format("l");
   var currentWeatherIcon = forecasts.current.weather[0].icon;
 
-  citySearchTerm.innerHTML =
-    searchTerm.charAt(0).toUpperCase() +
-    searchTerm.slice(1) +
-    " (" +
-    currentDate +
-    ")";
+  function capitalize(searchTerm) {
+    return searchTerm
+      .toLowerCase()
+      .split(" ")
+      .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+      .join(" ");
+  }
+  citySearchTerm.innerHTML = capitalize(searchTerm) + " " + currentDate;
 
   var weatherIconImgEl = document.createElement("img");
-  var imgSrc = "http://openweathermap.org/img/w/" + currentWeatherIcon + ".png";
+  var imgSrc =
+    "https://openweathermap.org/img/w/" + currentWeatherIcon + ".png";
   weatherIconImgEl.setAttribute("src", imgSrc);
 
   var currentTempEl = document.createElement("p");
@@ -134,7 +136,7 @@ var displayFutureForecasts = function (forecasts) {
     var futureWeatherIcon = forecasts.daily[i].weather[0].icon;
     var futureWeatherIconImgEl = document.createElement("img");
     var imgSrc =
-      "http://openweathermap.org/img/w/" + futureWeatherIcon + ".png";
+      "https://openweathermap.org/img/w/" + futureWeatherIcon + ".png";
     futureWeatherIconImgEl.setAttribute("src", imgSrc);
 
     var futureTempEl = document.createElement("p");
@@ -197,10 +199,13 @@ function displayHistoryData(event) {
 
 function init() {
   var storedCities = localStorage.getItem("cities");
+  // if (storedCities) {
+  //   searchHistory = JSON.parse(storedCities);
+  // }
   var storedCitiesArr = JSON.parse(storedCities);
   var historyEl = document.querySelector(".history-card");
 
-  for (var i = 0; i < storedCitiesArr.length; i++) {
+  for (var i = storedCitiesArr.length - 1; i >= 0; i--) {
     var btn = document.createElement("button");
     btn.setAttribute("type", "button");
     btn.setAttribute("class", "historyBtn");
