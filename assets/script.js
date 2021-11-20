@@ -75,7 +75,7 @@ var displayWeatherForecast = function (forecasts, searchTerm) {
     cityContainerEl.textContent = "No forecasts found.";
     return;
   }
-  var currentDate = moment.unix(forecasts.current.dt).format("l");
+  var currentDate = moment.unix(forecasts.current.dt).format("dddd l");
   var currentWeatherIcon = forecasts.current.weather[0].icon;
 
   function capitalize(searchTerm) {
@@ -129,7 +129,7 @@ var displayWeatherForecast = function (forecasts, searchTerm) {
 var displayFutureForecasts = function (forecasts) {
   const iterations = 5;
   for (var i = 1; i <= iterations; i++) {
-    var futureDatesText = moment.unix(forecasts.daily[i].dt).format("l");
+    var futureDatesText = moment.unix(forecasts.daily[i].dt).format("dddd l");
     var futureDatesEl = document.createElement("h5");
     futureDatesEl.textContent = futureDatesText;
 
