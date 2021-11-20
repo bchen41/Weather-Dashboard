@@ -27,7 +27,7 @@ var getLatAndLon = function (city) {
   return fetch(geoAPI)
     .then(function (response) {
       if (response.ok) {
-        console.log(response);
+        // console.log(response);
         return response.json().then(function (geoData) {
           return geoData;
         });
@@ -40,7 +40,7 @@ var getLatAndLon = function (city) {
 
 var getWeatherForecast = function (city) {
   getLatAndLon(city).then(function (geoData) {
-    console.log(geoData);
+    // console.log(geoData);
     var lat = geoData[0].lat;
     var lon = geoData[0].lon;
     var apiURL =
@@ -52,9 +52,9 @@ var getWeatherForecast = function (city) {
     return fetch(apiURL)
       .then(function (response) {
         if (response.ok) {
-          console.log(response);
+          // console.log(response);
           response.json().then(function (data) {
-            console.log(data);
+            // console.log(data);
             displayWeatherForecast(data, city);
             displayFutureForecasts(data);
             appendToHistory(city);
@@ -213,7 +213,7 @@ function init() {
     btn.setAttribute("type", "button");
     btn.setAttribute("class", "historyBtn");
     btn.textContent = storedCitiesArr[i];
-    console.log(btn.textContent);
+    // console.log(btn.textContent);
 
     historyEl.append(btn);
     btn.addEventListener("click", displayHistoryData);
