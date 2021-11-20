@@ -23,27 +23,23 @@
 
             <div class="col-12 col-md-4">
                 <section class="search-card">
-                    <h3 class="card-header">Search for a City:</h3>
+                    <h3 class="card-header" id="search-box">Search for a City:</h3>
                     <form id="weather-form" class="card-body ">
                         <input type="text" name="cityname" id="cityname" class="form-input">
                         <button type="submit" class="btn">Search</button>
                     </form>
                 </section>
 
-
                 <section>
-                    <h3 class="card-header">Search History:</h3>
-                    <div class="history-card"></div>
-                    <!-- create element buttons with search history data and append to div -->
+                    <h3 class="card-header" id="search-box">Search History:</h3>
                 </section>
+                <div class="history-card"></div>
+                <!-- create element buttons with search history data and append to div -->
             </div>
-
 
             <div class="col-12 col-md-8">
                 <h2 class="city-search-term">City Name</h2>
                 <div id="city-container"></div>
-
-
 
                 <div class="row">
                     <div class="col">
@@ -52,35 +48,18 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-12 col-md-4 col-lg" id="1">
-
-
-                    </div>
-                    <div class="col-12 col-md-4 col-lg" id="2">
-
-                    </div>
-                    <div class="col-12 col-md-4 col-lg" id="3">
-
-                    </div>
-                    <div class="col-12 col-md-4 col-lg" id="4">
-
-                    </div>
-                    <div class="col-12 col-md-4 col-lg" id="5">
-
-                    </div>
+                    <div class="col-12 col-md-4 col-lg box" id="1"></div>
+                    <div class="col-12 col-md-4 col-lg box" id="2"></div>
+                    <div class="col-12 col-md-4 col-lg box" id="3"></div>
+                    <div class="col-12 col-md-4 col-lg box" id="4"></div>
+                    <div class="col-12 col-md-4 col-lg box" id="5"></div>
                 </div>
 
             </div>
 
-
-
-
-
-
-
         </div>
-
     </main>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="./assets/script.js"></script>
 </body>
