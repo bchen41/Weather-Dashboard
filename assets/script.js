@@ -75,6 +75,10 @@ var displayWeatherForecast = function (forecasts, searchTerm) {
     cityContainerEl.textContent = "No forecasts found.";
     return;
   }
+
+  cityContainerEl.style.margin = "15px";
+  cityContainerEl.style.padding = "10px";
+  cityContainerEl.style.backgroundColor = "#afdff6";
   var currentDate = moment.unix(forecasts.current.dt).format("dddd l");
   var currentWeatherIcon = forecasts.current.weather[0].icon;
 
@@ -153,7 +157,7 @@ var displayFutureForecasts = function (forecasts) {
     removeAllChildNodes(futureDaysEl);
     futureDaysEl.style.border = "solid 1px";
     futureDaysEl.style.padding = "5px";
-    futureDaysEl.style.backgroundColor = "gray";
+    futureDaysEl.style.backgroundColor = "#afdff6";
 
     futureDaysEl.append(
       futureDatesEl,
