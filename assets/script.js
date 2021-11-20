@@ -205,6 +205,9 @@ function init() {
   var storedCitiesArr = JSON.parse(storedCities);
   var historyEl = document.querySelector(".history-card");
 
+  if (!storedCitiesArr) {
+    return;
+  }
   for (var i = storedCitiesArr.length - 1; i >= 0; i--) {
     var btn = document.createElement("button");
     btn.setAttribute("type", "button");
